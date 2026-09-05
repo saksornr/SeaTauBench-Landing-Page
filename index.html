@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#487b2c">
+  <meta name="description" content="SeaTauBench evaluates tool-using agents across five Southeast Asian and regional languages. Explore results by task domain, language, scenario, and model.">
+  <meta property="og:title" content="SeaTauBench · Agents across languages">
+  <meta property="og:description" content="A multilingual benchmark for tool–agent–user interaction. Explore quality and robustness across languages, domains, and localization settings.">
+  <meta property="og:type" content="website">
+  <title>SeaTauBench · Agents across languages</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500;550;600;650;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="SeaTauBench home"><span class="brand-mark" aria-hidden="true">τ</span><span>Sea<span class="green">Tau</span>Bench</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navigation"><span></span><span></span><span></span></button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#explore">Leaderboard</a><a href="#scenarios">Scenarios</a><a href="#paper">Paper</a>
+        <a class="nav-github" href="https://github.com/SEACrowd/SEATauBench" target="_blank" rel="noopener noreferrer"><span data-icon="github"></span> GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero container" id="about" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="red-rule" aria-hidden="true"></span> A SEACrowd benchmark</div>
+        <h1 id="hero-title">Agent evaluation.<br><span class="green">Across Southeast Asia.</span></h1>
+        <p class="hero-description">Meet <strong>SeaTauBench</strong> — a benchmark for tool–agent–user interaction in five Southeast Asian and regional languages. Go beyond English to measure how well agents act, and how reliably they succeed.</p>
+        <div class="hero-actions"><a class="button primary" href="#explore">Explore the leaderboard <span aria-hidden="true">↘</span></a><a class="button secondary" href="https://github.com/SEACrowd/SEATauBench/blob/main/SEATauBench_v1.pdf" target="_blank" rel="noopener"><span data-icon="file"></span> Read the paper</a></div>
+        <p class="hero-note">Built on τ²-Bench. Grounded in real service tasks.</p>
+      </div>
+      <figure class="hero-image">
+        <img src="assets/sitaw.png" alt="A bundle of green sitaw, or yardlong beans, the inspiration for SeaTauBench’s name" width="1564" height="1563" fetchpriority="high">
+        <figcaption><span class="pronunciation">/si-tau-bench/</span><span>Like <em>sitaw</em>, the Filipino word for string beans.</span></figcaption>
+      </figure>
+    </section>
+    <div class="container benchmark-overview">
+      <dl class="stats"><div><dt>Target languages</dt><dd>5<span> + English baseline</span></dd></div><div><dt>Service domains</dt><dd>3<span> real-world settings</span></dd></div><div><dt>Core scenarios</dt><dd>4<span> localization settings</span></dd></div><div><dt>Agent models</dt><dd>3<span> model families</span></dd></div></dl>
+      <div class="language-strip" aria-label="Target languages"><span>Made for multilingual agents</span><span lang="id">Bahasa Indonesia</span><span lang="th">ไทย</span><span lang="tl">Filipino</span><span lang="vi">Tiếng Việt</span><span lang="zh">中文</span></div>
+    </div>
+
+    <section class="explorer section" id="explore" aria-labelledby="explore-title">
+      <div class="container">
+        <div class="section-top"><div><div class="eyebrow">The results</div><h2 id="explore-title">Explore the benchmark</h2><p>Compare task success and repeated-run reliability, one setting at a time.</p></div><a class="quiet-link" href="#methodology">How to read the scores <span aria-hidden="true">↗</span></a></div>
+        <div id="load-error" class="load-error" hidden role="alert"><p>We couldn’t load the benchmark results. You can still read the paper below.</p><button class="button secondary" id="retry">Try again</button></div>
+        <div class="explorer-controls" id="explorer-controls">
+          <div class="filter-grid">
+            <label class="filter"><span>Task domain</span><select id="domain" disabled><option value="all">All task domains</option><option value="airline">Airline</option><option value="retail">Retail</option><option value="telecom">Telecom</option></select></label>
+            <label class="filter"><span>Language</span><select id="language" disabled><option value="all">All languages</option><optgroup label="Baseline"><option value="en">English</option></optgroup><optgroup label="Target languages"><option value="id">Indonesian</option><option value="th">Thai</option><option value="tl">Filipino</option><option value="vi">Vietnamese</option><option value="zh">Mandarin Chinese</option></optgroup><optgroup label="Mixed tool configurations"><option value="bi">Bilingual</option><option value="tri">Trilingual</option><option value="quad">Quadlingual</option><option value="multi">Multilingual</option></optgroup></select></label>
+            <label class="filter"><span>Scenario</span><select id="scenario" disabled><option value="all">All core scenarios</option><option value="s1">S1 · English baseline</option><option value="s2">S2 · L2 interaction</option><option value="s3">S3 · L2 tools</option><option value="s4" selected>S4 · L2 domain</option><option value="s3-mix">S3 · Mixed-language tools</option></select></label>
+            <div class="filter model-filter"><span id="models-label">Models</span><details id="model-picker"><summary aria-labelledby="models-label model-count"><span id="model-count">All 3 models</span><span class="chevron" aria-hidden="true"></span></summary><fieldset class="model-options"><legend class="sr-only">Models to compare</legend><label><input type="checkbox" name="models" value="kimi-k2.5" checked> <span class="model-dot kimi-k2-5"></span>Kimi K2.5</label><label><input type="checkbox" name="models" value="gpt-5-mini" checked> <span class="model-dot gpt-5-mini"></span>GPT-5 mini</label><label><input type="checkbox" name="models" value="qwen3-235b" checked> <span class="model-dot qwen3-235b"></span>Qwen3 235B</label><div class="picker-actions"><button type="button" id="select-all">Select all</button><button type="button" id="clear-models">Clear</button></div></fieldset></details></div>
+          </div>
+          <div class="filter-caption"><p id="scenario-context">Localized dialogue, tools, policies, and databases.</p><button id="reset" class="text-button"><span data-icon="reset"></span> Reset filters</button></div>
+        </div>
+        <div class="results-toolbar"><div class="metric-switch" role="group" aria-label="Chart metric"><button data-metric="pass1" aria-pressed="true">pass@1</button><button data-metric="pass3" aria-pressed="false">pass³</button><button data-metric="rho3" aria-pressed="false">Robustness ρ³</button></div><span class="metric-direction">Higher is better <span aria-hidden="true">↑</span></span></div>
+        <div id="results" aria-busy="true">
+          <div class="charts-grid">
+            <figure class="chart-card"><div class="chart-heading"><h3>Performance by model</h3><span class="chart-unit">Score · %</span></div><div id="model-chart" class="chart-surface"><p class="chart-placeholder">Loading paper results…</p></div><figcaption id="model-caption">Mean across the selected benchmark settings.</figcaption></figure>
+            <figure class="chart-card"><div class="chart-heading"><h3>Performance by language</h3><span class="chart-unit">Score · %</span></div><div id="language-chart" class="chart-surface"><p class="chart-placeholder">Loading paper results…</p></div><figcaption id="chart-legend" class="chart-legend"></figcaption></figure>
+          </div>
+          <div class="leaderboard">
+            <div class="table-title"><div><h3>Leaderboard <span id="leaderboard-count" class="count-badge">3 models</span></h3><p id="result-summary" aria-live="polite">Loading the benchmark…</p></div><button class="button export-button" id="export" disabled><span data-icon="download"></span> Export CSV</button></div>
+            <div class="table-scroll" role="region" aria-label="Model leaderboard" tabindex="0"><table id="leaderboard-table"><caption class="sr-only">Model scores from the selected benchmark records. Scores are percentages. Click a metric heading to sort.</caption><thead><tr><th scope="col">Rank</th><th scope="col">Model</th><th scope="col" data-sort-heading="pass1" aria-sort="descending"><button data-sort="pass1">pass@1 <span class="sort-arrow">↓</span></button></th><th scope="col" data-sort-heading="pass2" aria-sort="none"><button data-sort="pass2">pass² <span class="sort-arrow">↕</span></button></th><th scope="col" data-sort-heading="pass3" aria-sort="none"><button data-sort="pass3">pass³ <span class="sort-arrow">↕</span></button></th><th scope="col" data-sort-heading="rho3" aria-sort="none"><button data-sort="rho3">Robustness ρ³ <span class="sort-arrow">↕</span></button></th><th scope="col">Result cells</th></tr></thead><tbody id="leaderboard-body"></tbody></table></div>
+            <div class="table-note"><span data-icon="info"></span><p>Macro average of matching result cells. Each domain × language × scenario has equal weight. Scores use the paper’s rounded values; “—” means not reported.</p></div>
+          </div>
+          <details class="source-results"><summary>Inspect individual results <span id="source-count"></span><span aria-hidden="true">+</span></summary><div class="table-scroll" role="region" aria-label="Individual source results" tabindex="0"><table><caption class="sr-only">All filtered result cells and their source table in the paper</caption><thead><tr><th>Model</th><th>Task domain</th><th>Language</th><th>Scenario</th><th>pass@1</th><th>pass²</th><th>pass³</th><th>ρ³</th><th>Source</th></tr></thead><tbody id="source-body"></tbody></table></div></details>
+        </div>
+        <noscript><p class="load-error">Enable JavaScript to filter results and explore the plots. The complete results are available in <a href="https://github.com/SEACrowd/SEATauBench/blob/main/SEATauBench_v1.pdf">Appendix G of the paper</a>.</p></noscript>
+        <p class="data-provenance">Manuscript snapshot · Appendix G, Tables 17–21. <a href="https://github.com/SEACrowd/SEATauBench/blob/main/SEATauBench_v1.pdf" target="_blank" rel="noopener">Public paper ↗</a><span>168 reported result cells · 3 trials per task</span></p>
+      </div>
+    </section>
+
+    <section class="container section scenarios-section" id="scenarios" aria-labelledby="scenarios-title">
+      <div class="section-top"><div><div class="eyebrow">Beyond translation</div><h2 id="scenarios-title">Four views of agent capability.</h2><p>Change the language of one surface. See where performance changes.</p></div><span class="small-label">L2 = target language</span></div>
+      <div class="scenario-grid">
+        <article class="scenario-card"><div class="scenario-id">S1 <span>Reference</span></div><h3>English baseline</h3><p>The original setting. Every agent-visible surface stays in English.</p><dl><div><dt>Dialogue</dt><dd>English</dd></div><div><dt>Tool schemas</dt><dd>English</dd></div><div><dt>Policies & database</dt><dd>English</dd></div></dl><button class="scenario-link" data-scenario-link="s1">Explore S1 <span aria-hidden="true">↗</span></button></article>
+        <article class="scenario-card"><div class="scenario-id">S2 <span>Dialogue</span></div><h3>L2 interaction</h3><p>Can the agent serve a user who speaks a different language?</p><dl><div><dt>Dialogue</dt><dd class="localized">L2</dd></div><div><dt>Tool schemas</dt><dd>English</dd></div><div><dt>Policies & database</dt><dd>English</dd></div></dl><button class="scenario-link" data-scenario-link="s2">Explore S2 <span aria-hidden="true">↗</span></button></article>
+        <article class="scenario-card"><div class="scenario-id">S3 <span>Tools</span></div><h3>L2 tools</h3><p>Can the agent use tools when their schemas are localized?</p><dl><div><dt>Dialogue</dt><dd>English</dd></div><div><dt>Tool schemas</dt><dd class="localized">L2</dd></div><div><dt>Policies & database</dt><dd>English</dd></div></dl><button class="scenario-link" data-scenario-link="s3">Explore S3 <span aria-hidden="true">↗</span></button></article>
+        <article class="scenario-card full-localization"><div class="scenario-id">S4 <span>Full environment</span></div><h3>L2 domain</h3><p>The full test: dialogue, tools, and domain context in the target language.</p><dl><div><dt>Dialogue</dt><dd class="localized">L2</dd></div><div><dt>Tool schemas</dt><dd class="localized">L2</dd></div><div><dt>Policies & database</dt><dd class="localized">L2</dd></div></dl><button class="scenario-link" data-scenario-link="s4">Explore S4 <span aria-hidden="true">↗</span></button></article>
+      </div>
+      <p class="section-footnote">S2 and S3 isolate different surfaces; S3 does not build on S2. Tool execution and scoring stay canonical across all four settings. Mixed-language tool results are also available in the explorer.</p>
+    </section>
+
+    <section class="methodology section" id="methodology" aria-labelledby="method-title"><div class="container methodology-grid"><div class="method-intro"><div class="eyebrow">Quality & reliability</div><h2 id="method-title">A successful run<br>is only part of the story.</h2><p>SeaTauBench evaluates whether an agent reaches the correct final state, then checks whether it can repeat that success over three trials.</p><a class="quiet-link" href="https://github.com/SEACrowd/SEATauBench/blob/main/SEATauBench_v1.pdf" target="_blank" rel="noopener">Read the evaluation protocol ↗</a></div><div class="metric-definitions"><article><span class="metric-formula">pass@1</span><div><h3>Task success</h3><p>Mean success rate across independent trials. Does the agent complete the task?</p></div></article><article><span class="metric-formula">pass³</span><div><h3>Consistent success</h3><p>The share of tasks that succeed in all three trials. Can the agent get it right every time?</p></div></article><article><span class="metric-formula">ρ³</span><div><h3>Robustness</h3><p>pass³ divided by pass@1 for each result cell. Measures repeatability relative to success; a high value alone does not imply high task quality.</p></div></article></div></div></section>
+
+    <section class="container paper-section section" id="paper" aria-labelledby="paper-title"><div class="paper-label"><div class="eyebrow">The paper</div><span class="paper-symbol" aria-hidden="true">τ</span><span class="seacrowd-wordmark">SEA<span>Crowd</span></span></div><div class="paper-copy"><h2 id="paper-title">SeaTauBench: Progressively Adapting Tool-Agent-User Evaluation Into Low-Resource Southeast Asian Languages</h2><p class="authors">My Chiffon Nguyen · Aulia Adila · Saksorn Ruangtanusak · Kittiphat Leesombatwathana · Vissuta Gunawan Lim · Patomporn Payoungkhamdee · Samuel Cahyawijaya</p><p class="affiliations">SEACrowd · AI Singapore · Nanyang Technological University · SCB DataX · Chulalongkorn University · VISTEC · University of Indonesia · Cohere</p><div class="paper-actions"><a class="button primary" href="https://github.com/SEACrowd/SEATauBench/blob/main/SEATauBench_v1.pdf" target="_blank" rel="noopener"><span data-icon="file"></span> Read paper</a><a class="button secondary" href="https://github.com/SEACrowd/SEATauBench" target="_blank" rel="noopener noreferrer"><span data-icon="github"></span> Code & data</a><button class="text-button" id="copy-citation"><span data-icon="copy"></span> Copy BibTeX</button></div><details class="citation"><summary>View citation</summary><pre id="bibtex">@misc{nguyen2026seataubench,
+  title = {SEATauBench: Progressively Adapting Tool-Agent-User
+           Evaluation Into Low-Resource Southeast Asian Languages},
+  author = {Nguyen, My Chiffon and Adila, Aulia and
+            Ruangtanusak, Saksorn and Leesombatwathana, Kittiphat and
+            Lim, Vissuta Gunawan and Payoungkhamdee, Patomporn and
+            Cahyawijaya, Samuel},
+  year = {2026},
+  howpublished = {Manuscript},
+  url = {https://github.com/SEACrowd/SEATauBench}
+}</pre></details></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">τ</span><span>Sea<span class="green">Tau</span>Bench</span></a><p>Building better multilingual agents, together.</p><a href="https://github.com/saksornr/SeaTauBench-Landing-Page" target="_blank" rel="noopener noreferrer">Website source ↗</a></div></footer>
+  <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div><div id="toast" role="status" class="toast" hidden></div>
+</body>
+</html>
